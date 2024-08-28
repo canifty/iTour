@@ -6,16 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Query var destinations: [Destination]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(destinations) { destinations in
+                    VStack(alignment: .leading) {
+                        Text(destinations.name)
+                            .font(.headline)
+                        
+                        Text(destinations.date.formatted(date: .long, time: .shortened))
+                        
+                    }
+                }
+            }
+            .navigationTitle("iTour")
         }
-        .padding()
     }
 }
 
